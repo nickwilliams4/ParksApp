@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -7,6 +8,21 @@
   <title>Park App</title>
 </head>
 <body>
+    <div class="container">
+        <h1>Parks Finder</h1>
+
+        <form id="js-form">
+            <label for="search-term">State:</label>
+            <input type="text" name="search-term" id="js-search-term" class="search" required>
+
+            <label for="max-results">Maximum results to return</label>
+            <input type="number" name="max-results" id="js-max-results" value="10" class="results">
+
+            <input type="submit" value="Go!" class="searchButton">
+        </form>
+        <div class="searchResults"></div>
+        <p id="js-error-message" class="error-message"></p>
+    </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="app.js"></script>
 </body>
