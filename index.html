@@ -10,6 +10,9 @@
 <body>
     <div class="container">
         <h1>Parks Finder</h1>
+        <h3>Type your search in the form of a 2-letter state code</h3>
+        <h5>Example: for "Colorado", type "CO" <br> To search multiple states, separate 2-letter state codes by a comma</h5>
+        
 
         <form id="js-form">
             <label for="search-term">State:</label>
@@ -20,6 +23,9 @@
 
             <input type="submit" value="Go!" class="searchButton">
         </form>
+        <div class="displayMessage">
+          <h3>Your Results:</h3>
+        </div>
         <div class="searchResults"></div>
         <p id="js-error-message" class="error-message"></p>
     </div>

@@ -2,6 +2,7 @@
 
 
 function searchHandler() {
+  const numberOfResults = $('#js-max-results').val();
   const search = $('.search').val();
   if (search.trim() === '') {
     $('.error-message').html('Please enter a state');
@@ -9,12 +10,12 @@ function searchHandler() {
     $('.search').val('');
     $('.searchResults').empty();
     $('.error-message').html('');
-    getParks(search);
+    getParks(search.replace(' ',''), numberOfResults);
   }
 }
 
-function getParks(query) {
-  const searchURL = `https://developer.nps.gov/api/v1/parks?stateCode=${query}&api_key=xwZsd8iEC2eTtbMSILdCFUlOcveQmekwkkTbMYac`
+function getParks(query, limit) {
+  const searchURL = `https://developer.nps.gov/api/v1/parks?stateCode=${query}&api_key=xwZsd8iEC2eTtbMSILdCFUlOcveQmekwkkTbMYac&limit=${limit}`
   fetch(searchURL)
     .then(response => {
       if (!response.ok) {
@@ -29,17 +30,23 @@ function getParks(query) {
 })
 }
 function displayResults(results) {
+  console.log(results);
+  $('.displayMessage').show();
   $('.searchResults').html(
-    results
-      .map(results => `<div>${data.states[0]}</div>`)
+      results.data
+      .map(park => `<br> <div>Park Name: ${park.fullName} <br> Park Description: ${park.description} <br> <a href="${park.url}" target=blank>Link to Website</a></div> <br>`)
       .join('')
   );
+  if (results.total == 0) {
+    $('.error-message').html('No results. Please try your search again.')
+  }
 }
 
 function watchForm() {
   $('form').submit(event => {
     event.preventDefault();
     searchHandler();
+    $('.displayMessage').hide();
   });
 }
 
